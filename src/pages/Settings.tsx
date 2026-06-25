@@ -34,8 +34,13 @@ export default function Settings() {
 
   const connectMutation = useMutation({
     mutationFn: connectInstagram,
-    onSuccess: () => {
-      setStatus('✅ Instagram account connected successfully!');
+    onSuccess: (data) => {
+      const savedAccounts = data.data?.accounts || [];
+      if (savedAccounts.length > 0) {
+        setStatus('✅ Instagram account connected successfully!');
+      } else {
+        setStatus('⚠️ Facebook connected, but no Instagram Business accounts were found!');
+      }
       queryClient.invalidateQueries({ queryKey: ['instagram-accounts'] });
     },
     onError: (err: any) => {
@@ -136,6 +141,17 @@ export default function Settings() {
         ) : accounts.length === 0 ? (
           <div className="text-center py-8 text-muted-foreground">
             <p className="text-4xl mb-3">📷</p>
+            {status.includes('⚠️') && (
+              <div className="bg-amber-500/10 border border-amber-500/20 text-amber-500 p-4 rounded-lg text-sm mb-6 max-w-md mx-auto text-left">
+                <p className="font-bold mb-2">How to fix this issue:</p>
+                <ol className="list-decimal pl-4 space-y-1">
+                  <li>Open Instagram on your phone.</li>
+                  <li>Go to Settings &rarr; Account Type &rarr; <strong>Switch to Professional Account</strong>.</li>
+                  <li>Go to Edit Profile &rarr; Page, and <strong>connect it to your Facebook Page</strong>.</li>
+                  <li>Click "Connect with Facebook" above again!</li>
+                </ol>
+              </div>
+            )}
             <p>No Instagram accounts connected yet.</p>
             <p className="text-sm mt-1">Click the button above to get started.</p>
           </div>
