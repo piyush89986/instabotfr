@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, keepPreviousData } from '@tanstack/react-query';
 import { fetchContacts } from '../services/crm.service';
 import { Button } from '../components/ui/Button';
 import { Input } from '../components/ui/Input';
-import { Search, Download, Filter, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Search, Download, ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function CRM() {
   const [page, setPage] = useState(1);
   const [statusFilter, setStatusFilter] = useState<string | undefined>();
   
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading, isError } = useQuery<any>({
     queryKey: ['contacts', page, statusFilter],
     queryFn: () => fetchContacts(page, 10, statusFilter),
-    keepPreviousData: true
+    placeholderData: keepPreviousData
   });
 
   const getStatusBadge = (status: string) => {
