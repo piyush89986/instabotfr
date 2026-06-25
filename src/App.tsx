@@ -6,6 +6,9 @@ import Dashboard from './pages/Dashboard';
 import Inbox from './pages/Inbox';
 import CRM from './pages/CRM';
 import Automations from './pages/Automations';
+import Settings from './pages/Settings';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
 
 function App() {
   return (
@@ -13,6 +16,8 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/terms" element={<TermsOfService />} />
         
         {/* Protected Application Routes */}
         <Route element={<ProtectedRoute />}>
@@ -21,7 +26,7 @@ function App() {
           <Route path="/crm" element={<CRM />} />
           <Route path="/automations" element={<Automations />} />
           <Route path="/analytics" element={<Navigate to="/" replace />} />
-          <Route path="/settings" element={<Navigate to="/" replace />} />
+          <Route path="/settings" element={<Settings />} />
         </Route>
       </Routes>
     </Router>
