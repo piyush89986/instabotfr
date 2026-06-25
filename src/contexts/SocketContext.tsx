@@ -20,7 +20,7 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     if (!token) return;
 
     // Connect to the backend Socket.IO server
-    const socketInstance = io(import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000', {
+    const socketInstance = io(import.meta.env.VITE_BACKEND_URL || 'https://instabotbac.onrender.com', {
       transports: ['websocket'],
     });
 
