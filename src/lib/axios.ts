@@ -24,19 +24,24 @@ api.interceptors.response.use(
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       try {
+        const refreshToken = localStorage.getItem('refreshToken');
         const { data } = await axios.post(
           `${import.meta.env.VITE_API_URL || 'https://instabotbac.onrender.com/api/v1'}/auth/refresh`,
-          {},
+          { refreshToken },
           { withCredentials: true }
         );
 
         localStorage.setItem('accessToken', data.data.accessToken);
+        if (data.data.refreshToken) {
+          localStorage.setItem('refreshToken', data.data.refreshToken);
+        }
         originalRequest.headers.Authorization = `Bearer ${data.data.accessToken}`;
 
         return api(originalRequest);
       } catch (refreshError) {
         // If refresh fails, log out
         localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
         window.location.href = '/login';
         return Promise.reject(refreshError);
       }

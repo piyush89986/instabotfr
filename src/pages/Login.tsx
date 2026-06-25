@@ -17,6 +17,7 @@ export default function Login() {
     mutationFn: login,
     onSuccess: (data) => {
       localStorage.setItem('accessToken', data.accessToken);
+      localStorage.setItem('refreshToken', data.refreshToken);
       // Invalidate the user query to refetch user data on next mount
       queryClient.invalidateQueries({ queryKey: ['user'] });
       navigate('/');

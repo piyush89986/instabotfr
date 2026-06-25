@@ -19,6 +19,7 @@ export default function Register() {
     mutationFn: register,
     onSuccess: (data) => {
       localStorage.setItem('accessToken', data.accessToken);
+      localStorage.setItem('refreshToken', data.refreshToken);
       navigate('/');
     },
     onError: (err: any) => {
