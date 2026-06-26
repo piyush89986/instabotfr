@@ -6,9 +6,7 @@ import Dashboard from './pages/Dashboard';
 import Inbox from './pages/Inbox';
 import CRM from './pages/CRM';
 import Automations from './pages/Automations';
-import AutomationsBuilder from './pages/AutomationsBuilder';
 import KnowledgeBase from './pages/KnowledgeBase';
-import Content from './pages/Content';
 import Settings from './pages/Settings';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
@@ -28,7 +26,6 @@ function App() {
           <Route path="/inbox" element={<Inbox />} />
           <Route path="/crm" element={<CRM />} />
           <Route path="/automations" element={<Automations />} />
-          <Route path="/automations/:id" element={<AutomationsBuilder />} />
           <Route path="/knowledgebase" element={<KnowledgeBase />} />
           <Route path="/analytics" element={<Navigate to="/" replace />} />
           <Route path="/settings" element={<Settings />} />
