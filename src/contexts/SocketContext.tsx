@@ -15,29 +15,39 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
-    // Only connect if we have a token
-    const token = localStorage.getItem('accessToken');
-    if (!token) return;
+    let socketInstance: Socket | null = null;
 
-    // Connect to the backend Socket.IO server
-    const socketInstance = io(import.meta.env.VITE_BACKEND_URL || 'https://instabotbac.onrender.com', {
-      transports: ['websocket'],
-    });
+    const connectSocket = () => {
+      const token = localStorage.getItem('accessToken');
+      if (!token || socketInstance) return;
 
-    socketInstance.on('connect', () => {
-      setIsConnected(true);
-      // We can emit a join_workspace event here, or the backend can handle it on connection if we pass the token
-      socketInstance.emit('authenticate', { token });
-    });
+      // Connect to the backend Socket.IO server
+      socketInstance = io(import.meta.env.VITE_BACKEND_URL || 'https://instabotbac.onrender.com', {
+        transports: ['websocket'],
+      });
 
-    socketInstance.on('disconnect', () => {
-      setIsConnected(false);
-    });
+      socketInstance.on('connect', () => {
+        setIsConnected(true);
+        socketInstance?.emit('authenticate', { token });
+      });
 
-    setSocket(socketInstance);
+      socketInstance.on('disconnect', () => {
+        setIsConnected(false);
+      });
+
+      setSocket(socketInstance);
+    };
+
+    connectSocket();
+    
+    // Check for token every 2 seconds (fixes issue where socket doesn't connect after login without a page refresh)
+    const interval = setInterval(connectSocket, 2000);
 
     return () => {
-      socketInstance.disconnect();
+      clearInterval(interval);
+      if (socketInstance) {
+        socketInstance.disconnect();
+      }
     };
   }, []);
 
