@@ -2,6 +2,7 @@ import api from '../lib/axios';
 
 export const fetchConversations = async (status: string = 'OPEN') => {
   const { data } = await api.get(`/inbox/conversations?status=${status}`);
+  console.log('Conversations API Response:', data);
   return data.data.conversations;
 };
 

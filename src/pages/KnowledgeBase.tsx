@@ -45,9 +45,9 @@ export default function KnowledgeBase() {
             Paste your business information, FAQs, and product details here. The AI will automatically read this and use it to answer customer DMs.
           </p>
         </div>
-        
-        <Button 
-          onClick={handleSave} 
+
+        <Button
+          onClick={handleSave}
           disabled={updateMutation.isPending}
           className="gap-2"
         >
@@ -69,7 +69,7 @@ export default function KnowledgeBase() {
         <p className="text-xs text-muted-foreground mb-4">
           Write this as a "System Prompt" (e.g., "You are a helpful assistant for Bob's Bike Shop. We sell mountain bikes for $500..."). Keep it clear and concise.
         </p>
-        
+
         {isLoading ? (
           <div className="h-[500px] w-full bg-secondary/50 animate-pulse rounded-lg flex items-center justify-center">
             <Loader2 className="animate-spin text-muted-foreground h-8 w-8" />
