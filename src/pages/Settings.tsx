@@ -85,7 +85,7 @@ export default function Settings() {
       },
       {
         scope:
-          'instagram_basic,instagram_manage_messages,instagram_manage_comments,pages_messaging,pages_read_engagement,pages_show_list,business_management',
+          'instagram_basic,instagram_manage_messages,instagram_manage_comments,instagram_content_publish,pages_messaging,pages_read_engagement,pages_show_list,business_management',
       }
     );
   };
