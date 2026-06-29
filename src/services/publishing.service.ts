@@ -10,6 +10,6 @@ export interface CreatePostParams {
 }
 
 export const createPost = async (params: CreatePostParams) => {
-  const { data } = await api.post('/publishing', params);
+  const { data } = await api.post('/publishing/create', params);
   return data.data.post;
 };
