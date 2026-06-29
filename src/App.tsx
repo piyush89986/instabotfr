@@ -10,6 +10,8 @@ import KnowledgeBase from './pages/KnowledgeBase';
 import Settings from './pages/Settings';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
+import Publishing from './pages/Publishing';
+import Products from './pages/Products';
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
           <Route path="/crm" element={<CRM />} />
           <Route path="/automations" element={<Automations />} />
           <Route path="/knowledgebase" element={<KnowledgeBase />} />
+          <Route path="/publishing" element={<Publishing />} />
+          <Route path="/products" element={<Products />} />
           <Route path="/analytics" element={<Navigate to="/" replace />} />
           <Route path="/settings" element={<Settings />} />
         </Route>

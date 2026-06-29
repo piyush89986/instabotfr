@@ -13,12 +13,14 @@ export default function Dashboard() {
   if (isLoading) return <div className="text-muted-foreground animate-pulse">Loading analytics...</div>;
   if (isError) return <div className="text-destructive">Failed to load analytics. Ensure the backend is running.</div>;
 
-  const { overview, trends } = stats;
+  const { overview, trends, instagram } = stats;
 
   const cards = [
     { title: 'Total Leads', value: overview.totalContacts, icon: Users, color: 'text-blue-500' },
     { title: 'Open Conversations', value: overview.openConversations, icon: MessageSquare, color: 'text-amber-500' },
     { title: 'AI Messages Sent', value: overview.totalAiMessagesSent, icon: Zap, color: 'text-primary' },
+    { title: 'Instagram Followers', value: instagram?.followers || 0, icon: Users, color: 'text-pink-500' },
+    { title: 'Estimated Reach', value: instagram?.reach || 0, icon: ArrowUpRight, color: 'text-purple-500' },
   ];
 
   return (
@@ -28,7 +30,7 @@ export default function Dashboard() {
         <p className="text-muted-foreground mt-1">Here's how your automations are performing today.</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
         {cards.map((card, i) => {
           const Icon = card.icon;
           return (

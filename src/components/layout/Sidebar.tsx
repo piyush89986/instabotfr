@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, MessageSquare, Workflow, BarChart3, Settings, Users, BookOpen } from 'lucide-react';
+import { LayoutDashboard, MessageSquare, Workflow, BarChart3, Settings, Users, BookOpen, Calendar, ShoppingBag } from 'lucide-react';
 import { cn } from '../../lib/utils';
 
 export default function Sidebar() {
@@ -11,6 +11,8 @@ export default function Sidebar() {
     { name: 'Live Inbox', path: '/inbox', icon: MessageSquare },
     { name: 'Contacts (CRM)', path: '/crm', icon: Users },
     { name: 'Automations', path: '/automations', icon: Workflow },
+    { name: 'Publishing', path: '/publishing', icon: Calendar },
+    { name: 'Products', path: '/products', icon: ShoppingBag },
     { name: 'Knowledge Base', path: '/knowledgebase', icon: BookOpen },
     { name: 'Analytics', path: '/analytics', icon: BarChart3 },
     { name: 'Settings', path: '/settings', icon: Settings },
